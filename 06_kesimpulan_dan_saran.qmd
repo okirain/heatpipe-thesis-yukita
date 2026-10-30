@@ -1,0 +1,35 @@
+# BAB VI KESIMPULAN DAN SARAN
+
+## VI.1. Kesimpulan
+
+Berdasarkan keseluruhan hasil pemodelan komputasi, simulasi numerik model tereduksi, validasi terhadap data eksperimen NASA KRUSTY, serta analisis penerapan pada teras *Indonesian Space Reactor* (ISR) 500 $\text{kW}_{\text{th}}$, simpulan utama yang dapat ditarik adalah sebagai berikut:
+
+1. **Keberhasilan Pengembangan Simulator Model Tereduksi:**  
+   Telah berhasil dikembangkan kode simulasi numerik model tereduksi (*reduced-order model*) 1D berbasis Python untuk menganalisis dinamika aliran dua fasa pada pipa kalor logam cair natrium temperatur tinggi. Kode ini secara komprehensif mengintegrasikan persamaan momentum aliran uap Navier-Stokes 1D dengan efek pemulihan tekanan inersia kondensor, aliran filtrasi cairan dalam struktur kapiler berarteri (*arterial wick*) berdasarkan hukum Darcy, serta mengevaluasi secara simultan lima batas fisik Cotter dan Busse (batas kapiler, sonik, *entrainment*, mendidih, dan viskos).
+
+2. **Validitas dan Akurasi Tinggi Model terhadap Data Lapangan KRUSTY:**  
+   Pengujian model terhadap data telemetri 8 titik termokopel aksial eksperimen NASA KRUSTY (*Kilowatt Reactor Using Stirling Technology*) pada daya 625 W dan temperatur 1020 K membuktikan kesesuaian yang sangat tinggi dengan nilai *Root Mean Square Error* (RMSE) sebesar **3,12 K**, koefisien determinasi $R^2 = \mathbf{0{,}9490}$, dan galat persentase relatif rata-rata (MAPE) sebesar **0,268%**. Hal ini mengonfirmasi keandalan model untuk memprediksi profil termohidrolika pipa kalor logam cair secara akurat.
+
+3. **Keunggulan Termohidrolika Kondisi Mikrogravitasi Antariksa ($0g$):**  
+   Ketiadaan gaya gravitasi di luar angkasa mengeliminasi penalti penurunan tekanan hidrostatik cairan ($\Delta P_g = 0$), sehingga meningkatkan kapasitas batas kapiler pipa kalor natrium dari 21,55 kW pada orientasi vertikal di darat ($1g$) menjadi **253,1 kW** pada kondisi mikrogravitasi ($0g$) pada temperatur 950 K (peningkatan sebesar 11,7 kali lipat).
+
+4. **Kelayakan Penuh Penerapan pada Teras Indonesian Space Reactor (ISR):**  
+   Penerapan 61 unit pipa kalor natrium berstruktur arteri komposit mandiri pada teras ISR 500 $\text{kW}_{\text{th}}$ berdaya rata-rata pin 8,20 kWth dan daya puncak pin 10,25 kWth menghasilkan margin keselamatan kapiler (*capillary safety margin*) yang sangat tinggi sebesar **24,7 kali lipat** di atas beban puncak pin. Penurunan tekanan sirkulasi total fluida dalam pipa kalor hanya tercatat 1028 Pa, jauh di bawah kemampuan tekanan hisap kapiler pori wick sebesar 11024 Pa, menjamin kelangsungan sirkulasi cairan tanpa risiko pengeringan (*dryout*).
+
+5. **Manfaat Rekayasa Komparatif terhadap Sistem Pompa Konvensional:**  
+   Penggantian sistem pompa paksa Na-78K dengan pipa kalor pasif natrium berhasil memangkas massa total subsistem pendingin teras reaktor sebesar **22,77 kg** (penghematan massa sebesar **32,0%**), mengeliminasi total gangguan getaran mekanik dan kebisingan akustik (*zero mechanical jitter*) yang sangat menguntungkan kestabilan instrumen ilmiah wahana antariksa, serta meningkatkan keandalan teras melalui modularitas pendinginan pasif di mana kerusakan lokal satu pipa kalor tidak memicu kegagalan teras secara menyeluruh (*loss of forced cooling*).
+
+---
+
+## VI.2. Saran
+
+Guna menyempurnakan dan memperluas cakupan penelitian ini pada masa mendatang, beberapa saran yang direkomendasikan adalah:
+
+1. **Pengembangan Pemodelan Termal Transien dan Pembekuan-Pencairan (*Freeze-Thaw*):**  
+   Penelitian lanjutan disarankan mengembangkan model tereduksi transien multi-dimensi (2D $r-z$) yang mempu menyimulasikan fenomena transien pemulaian reaktor dari kondisi natrium beku padat pada temperatur kamar antariksa (*cold frozen startup*) hingga mencapai kesetimbangan tunak, termasuk perancangan daya pemanas awal (*pre-heaters*).
+
+2. **Kopling Multi-Fisika Termohidrolika-Neutronik (*Coupled TH-Neutronics*):**  
+   Disarankan untuk mengintegrasikan simulator aliran dua fasa pipa kalor ini secara langsung dengan perangkat lunak simulasi neutronik Monte Carlo (seperti OpenMC atau Serpent) untuk menangkap efek umpan balik reaktivitas temperatur teras ISR secara dinamis (*dynamic reactivity feedback*).
+
+3. **Uji Eksperimental Laboratorium Skala Prototipe:**  
+   Direkomendasikan pembuatan tabung pipa kalor natrium berskala prototipe laboratorium berpendingin pasif dengan selubung Mo-30Re atau baja tahan panas super untuk memvalidasi kinerja perpindahan panas menggunakan pemanas listrik fluks tinggi sebelum diaplikasikan pada fasilitas reaktor sebenarnya.

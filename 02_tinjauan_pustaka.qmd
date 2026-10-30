@@ -1,0 +1,55 @@
+# BAB II TINJAUAN PUSTAKA
+
+## II.1. Isi Tinjauan Pustaka
+
+Penelitian ini mengintegrasikan kajian pustaka dari berbagai sumber ilmiah primer yang mencakup reaktor nuklir antariksa, desain konseptual teras *Indonesian Space Reactor* (ISR), hasil pengujian reaktor NASA KRUSTY, serta pemodelan termohidrolika aliran dua fasa pipa kalor logam cair.
+
+### II.1.1. Perkembangan Reaktor Cepat Antariksa
+
+Pemanfaatan tenaga nuklir di luar angkasa telah dirintis sejak dekade 1960-an melalui program SNAP (*Systems for Nuclear Auxiliary Power*) oleh Amerika Serikat dan program BUK serta TOPAZ oleh Uni Soviet [1, 3]. Sebagian besar reaktor antariksa masa lalu menggunakan bahan bakar uranium berkadar pengayaan tinggi (*Highly Enriched Uranium*, HEU) dengan fraksi massa U-235 berkisar 90% hingga 96% guna meminimalkan dimensi dan massa reaktor dengan meniadakan moderator neutron, menghasilkan spektrum neutron cepat (*fast neutron spectrum*) [1, 10]. 
+
+Meskipun moderator seperti zirkonium hidrida (ZrH) pada SNAP-10 memungkinkan reaktor berukuran sangat kecil dengan massa kritis rendah, keberadaan moderator membatasi temperatur operasi di bawah 900 K akibat desorpsi hidrogen [1]. Akibatnya, efisiensi termal konversi energi menjadi terbatas. Oleh sebab itu, untuk misi luar angkasa berdaya menengah hingga tinggi ($> 100\text{ kW}_{\text{th}}$) dan durasi operasi melampaui 10 tahun, reaktor spektrum cepat tanpa moderator menjadi arsitektur pilihan utama [1, 3]. Berbagai konsep modern seperti SAIR [11], S4 [12], HOMER [13], dan KRUSTY [2] mengadopsi spektrum cepat untuk memaksimalkan umur operasi dan kekompakan teras.
+
+### II.1.2. Desain Konseptual Indonesian Space Reactor (ISR)
+
+Khandaq, Harto, dan Agung (2020) dari Departemen Teknik Nuklir dan Teknik Fisika UGM mempublikasikan studi desain konseptual teras *Indonesian Space Reactor* (ISR) pada jurnal *Progress in Nuclear Energy* [1]. Desain ISR dirancang untuk mengatasi dilema antara ketentuan resolusi Majelis Umum PBB Prinsip 3 tahun 1992 (yang memperbolehkan penggunaan HEU untuk misi antariksa jika tidak ada alternatif lain) dan traktat non-proliferasi nuklir (NPT) [1]. ISR menggunakan bahan bakar uranium nitrida (*uranium nitride*, UN) dengan pengayaan U-235 sebesar 55%, yang secara signifikan lebih rendah dibanding reaktor antariksa konvensional (>90%), sehingga menekan biaya pengayaan dan memitigasi isu proliferasi nuklir.
+
+Teras ISR memiliki geometri heksagonal yang tersusun atas 61 pin bahan bakar berbentuk silinder berongga (*annular*), sebagaimana diilustrasikan pada publikasi acuan [1]. Dimensi teras memiliki tinggi total 43,2 cm, dengan tinggi zona aktif bahan bakar UN 25 cm, reflektor aksial berilium oksida (BeO) setebal 7 cm pada bagian bawah dan 6 cm pada bagian atas, serta kelongsong berbahan paduan molibdenum-renium (Mo-30Re) berdiameter 3,265 cm. Reaktor ini dirancang menghasilkan daya termal minimal 500 $\text{kW}_{\text{th}}$ dengan umur pakai mencapai 28 tahun pada daya 500 $\text{kW}_{\text{th}}$ dan 14 tahun pada daya 1 $\text{MW}_{\text{th}}$ [1].
+
+Untuk mengontrol reaktivitas dan menjamin keselamatan subkritis saat kecelakaan peluncuran (misalnya jatuh dan terendam di air tawar atau air laut), ISR dilengkapi dengan penyerap pergeseran spektrum (*Spectral Shift Absorber*, SSA) berbahan renium (Re) dan paduan Mo-30Re serta 6 drum kendali radial dengan pelat penyerap boron karbida ($\text{B}_4\text{C}$ pengayaan 80% B-10) [1]. Analisis neutronik KENO-VI pada penelitian tersebut menunjukkan bahwa koefisien reaktivitas temperatur teras bernilai negatif sebesar $-0{,}7872\text{ pcm/K}$ dan koefisien reaktivitas fraksi void pendingin sebesar $-0{,}0392\text{ pcm/%}$, yang menjamin keselamatan inheren reaktor [1].
+
+### II.1.3. Evaluasi Sistem Pendingin Teras: Keterbatasan Pompa Na-78K
+
+Pada publikasi awal Khandaq dkk. [1], sistem pembuangan kalor mengandalkan pendingin eutektik Na-78K (22% natrium dan 78% kalium berdasarkan fraksi massa) dengan sirkulasi pompa paksa. Pemilihan Na-78K didasarkan pada keunggulan fasa cairnya pada temperatur kamar (titik lebur $-12{,}6^\circ\text{C}$), sehingga proses pemulaian (*startup*) tidak memerlukan sistem pemanas awal (*pre-heating*) [1]. Temperatur saluran masuk (*inlet*) dan saluran keluar (*outlet*) teras masing-masing ditetapkan pada 750 K dan 950 K.
+
+Namun demikian, pada Bagian 3.7 publikasi tersebut secara tegas dinyatakan:
+> *"The use of liquid Na-78 K at room temperature requires pumps in the cooling system and consequently any movements of the pumps will certainly give noise to the spacecraft. Another promising alternative to the cooling system is sodium heat pipe. The use of heat pipes can eliminate the requirements for pumps as it is based on a passive cooling system. In addition, the use of sodium can increase the reactor operating temperature, because its boiling point is higher than Na-78 K."* [1]
+
+Kelemahan mendasar dari sirkulasi pompa paksa pada wahana antariksa adalah potensi *single-point failure* pada pompa mekanik/elektromagnetik. Apabila pompa mengalami kerusakan, sirkulasi pendingin terhenti mendadak (*Loss of Forced Cooling*, LOFC), memicu lonjakan temperatur teras dan ancaman pelelehan pin bahan bakar. Sebaliknya, apabila setiap pin bahan bakar didinginkan secara mandiri oleh pipa kalor natrium pasif, kerusakan pada salah satu pipa kalor bersifat terlokalisasi dan terisolasi. Hal ini sangat selaras dengan temuan Khandaq dkk. bahwa pelepasan hingga 2 pin bahan bakar dari teras ISR masih mempertahankan reaktivitas teras di atas kritis ($k_{eff} > 1$) [1].
+
+### II.1.4. Proyek Kilopower KRUSTY NASA
+
+Proyek KRUSTY (*Kilowatt Reactor Using Stirling Technology*) yang dikembangkan oleh NASA Glenn Research Center, Los Alamos National Laboratory (LANL), dan National Criticality Experiments Research Center (NCERC) merupakan tonggak bersejarah dalam validasi reaktor antariksa berpendingin heat pipe [2, 8]. KRUSTY dirancang untuk menghasilkan daya termal 5 $\text{kW}_{\text{th}}$ dan daya listrik 1 $\text{kW}_{\text{e}}$ menggunakan mesin Stirling.
+
+Teras KRUSTY menggunakan bahan bakar padat tuang silinder berongga uranium-molibdenum (U-8Mo) pengayaan tinggi yang didinginkan oleh 8 unit pipa kalor natrium yang terpasang simetris pada keliling luar teras [2, 8]. Pipa kalor KRUSTY terbuat dari selubung logam paduan super Haynes 230 dengan diameter luar 12,7 mm (0,5 inci), panjang evaporator 25 cm, panjang adiabatik 48 cm, dan panjang kondensor 32 cm yang dikopel ke kepala pemanas mesin Stirling [2]. Struktur kapiler yang digunakan adalah *annular sintered sodium powder wick* dengan tebal 0,75 mm dan jari-jari pori efektif $\sim 30\ \mu\text{m}$. Pengujian stasioner dan transien pada temperatur nominal 1020–1070 K membuktikan keandalan luar biasa pipa kalor natrium dalam mentransfer panas tanpa osilasi tekanan atau kavitasi [2, 8]. Data telemetri aksial temperatur dinding KRUSTY menjadi basis data eksperimen yang sangat representatif untuk memvalidasi model numerik tereduksi dalam penelitian ini.
+
+### II.1.5. Hidrodinamika Dua Fasa dan Batas Operasional Heat Pipe
+
+Pipa kalor bekerja berdasarkan siklus evaporasi-kondensasi fluida tertutup di mana sirkulasi massa didorong secara swadaya oleh aksi kapiler struktur berpori (*wick*) [4, 5, 6]. Dinamika perpindahan panas pipa kalor dibatasi oleh serangkaian batasan fisis yang dirumuskan oleh Cotter (1965), Busse (1973), Chi (1976), dan Faghri (1995) [4, 5, 6, 7]:
+1. **Batas Kapiler (*Capillary Limit*):** Terjadi ketika penurunan tekanan total sirkulasi fasa uap dan fasa cair melebihi kemampuan tekanan hisap kapiler maksimum pada meniskus pori terhalus: $\Delta P_{cap, max} < \Delta P_v + \Delta P_l + \Delta P_g$.
+2. **Batas Sonik (*Sonic Limit*):** Terjadi pada temperatur pemulaian rendah di mana laju alir uap pada ujung keluar evaporator mencapai bilangan Mach kesatuan ($Ma = 1$), memicu fenomena *choking* aliran kompresibel.
+3. **Batas Entrainment (*Entrainment/Flooding Limit*):** Terjadi ketika gaya gesek geser (*shear stress*) antara uap berkecepatan tinggi dan permukaan cairan bebas pada wick melebihi tegangan permukaan, mengakibatkan butiran cairan terlucut terbawa aliran uap menuju kondensor sebelum sempat mencapai evaporator.
+4. **Batas Mendidih (*Boiling Limit*):** Terjadi apabila fluks kalor radial pada dinding evaporator terlalu tinggi sehingga timbul gelembung uap nukleasi di dalam pori-pori wick (*bubble nucleation*), menghalangi kontak cairan dengan dinding wadah dan memicu *dryout*.
+5. **Batas Viskos (*Viscous Limit*):** Terjadi pada temperatur sangat rendah saat tekanan uap absolut natrium berada pada orde sangat kecil, sehingga gaya viskos mendominasi dan membatasi sirkulasi massa [6, 7].
+
+### II.1.6. Pengaruh Lingkungan Mikrogravitasi Antariksa
+
+Di lingkungan luar angkasa, percepatan gravitasi efektif mendekati nol ($g \approx 0\text{ m/s}^2$). Pada pipa kalor konvensional di permukaan bumi, komponen tekanan hidrostatik cairan $\Delta P_g = \rho_l g L \sin\psi$ memberikan penalti yang sangat besar jika pipa kalor beroperasi berlawanan arah gravitasi (*adverse tilt*, $\psi > 0$) [4, 6]. Sebaliknya, pada kondisi mikrogravitasi antariksa:
+$$\Delta P_g = 0$$
+Ketiadaan penalti hidrostatik ini memberikan keuntungan termohidrolika fundamental: cairan natrium kembali ke evaporator murni digerakkan oleh beda tekanan kapiler Laplace-Young, sehingga kapasitas batas kapiler heat pipe meningkat drastis dan pipa kalor dapat beroperasi pada orientasi sudut apa pun secara isotropis tanpa membebani wahana antariksa [7, 9].
+
+---
+
+## II.2. Penulisan Acuan
+
+Penulisan acuan pustaka dalam skripsi ini dikelola secara sistematis menggunakan perangkat lunak manajemen bibliografi dan disajikan mengikuti format sitasi numerik IEEE berbasis tanda kurung siku siku seperti $[1]$, $[2, 8]$, atau $[4-7]$. Seluruh literatur yang digunakan bersumber dari jurnal terindeks Scopus/Web of Science bereputasi tinggi, laporan teknis resmi badan antariksa NASA, buku teks referensi klasik perpindahan panas dan fisika reaktor, serta studi desain primer reaktor antariksa.

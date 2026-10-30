@@ -1,0 +1,77 @@
+# LAMPIRAN A: LISTING PROGRAM PYTHON SIMULATOR REDUCED-ORDER {.unnumbered}
+
+Berikut adalah ringkasan arsitektur modul komputasi utama `heatpipe_rom.py` yang dikembangkan dalam penelitian ini untuk pemodelan aliran dua fasa pada pipa kalor logam cair natrium:
+
+```python
+"""
+REDUCED-ORDER NUMERICAL TWO-PHASE FLOW SIMULATOR (heatpipe_rom.py)
+Author: Muhammad Naufal Tamimi (20/456315/TK/50445)
+Departemen Teknik Nuklir dan Teknik Fisika UGM
+"""
+
+import math
+from dataclasses import dataclass
+from typing import Dict, List, Optional
+
+class SodiumProperties:
+    T_MELT = 370.87  # K
+    T_CRIT = 2503.7  # K
+    GAS_CONST = 361.66  # J/(kg*K)
+    GAMMA = 1.667
+
+    @classmethod
+    def sat_pressure(cls, T: float) -> float:
+        log10_P_MPa = 6.4818 - (5244.7 / T) - 0.3870 * math.log10(T)
+        return (10.0 ** log10_P_MPa) * 1.0e6
+
+    @classmethod
+    def liquid_density(cls, T: float) -> float:
+        Tc = T - 273.15
+        return 1014.0 - 0.235 * Tc - 3.0e-5 * (Tc ** 2)
+
+    @classmethod
+    def vapor_density(cls, T: float, P: Optional[float] = None) -> float:
+        if P is None:
+            P = cls.sat_pressure(T)
+        dimer_frac = min(0.35, max(0.02, 0.00025 * (T - 600.0)))
+        effective_R = cls.GAS_CONST / (1.0 + dimer_frac)
+        return max(1.0e-5, P / (effective_R * T))
+
+    @classmethod
+    def latent_heat(cls, T: float) -> float:
+        theta = max(1.0e-4, 1.0 - (T / cls.T_CRIT))
+        return 4.65e6 * (theta ** 0.41)
+
+    @classmethod
+    def surface_tension(cls, T: float) -> float:
+        theta = max(1.0e-4, 1.0 - (T / cls.T_CRIT))
+        return 0.2405 * (theta ** 1.12)
+
+    @classmethod
+    def liquid_viscosity(cls, T: float) -> float:
+        return math.exp(-2.48 + (720.0 / T)) * 1.0e-3
+
+    @classmethod
+    def vapor_viscosity(cls, T: float) -> float:
+        return 1.8e-7 * (T ** 0.72)
+
+@dataclass
+class HeatPipeGeometry:
+    L_e: float; L_a: float; L_c: float
+    r_outer: float; t_wall: float; t_wick: float
+    r_pore: float; porosity: float; permeability: float
+    k_wall: float; k_wick_solid: float
+    inclination_deg: float = 0.0
+    g_accel: float = 0.0
+    is_arterial: bool = False
+    n_arteries: int = 4
+    r_artery: float = 0.00095
+
+    @property
+    def L_total(self) -> float:
+        return self.L_e + self.L_a + self.L_c
+
+    @property
+    def L_eff(self) -> float:
+        return 0.5 * self.L_e + self.L_a + 0.5 * self.L_c
+```

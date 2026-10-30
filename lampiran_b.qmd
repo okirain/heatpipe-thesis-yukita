@@ -1,0 +1,29 @@
+# LAMPIRAN B: TABEL PROPERTI TERMOFISIS NATRIUM DAN Mo-30Re {.unnumbered}
+
+Tabel B.1. Sifat termofisis cairan dan uap natrium pada berbagai temperatur evaluasi (ANL-RE-95-2).
+
+| Temperatur $T$ (K) | Tekanan Jenuh $P_{sat}$ (kPa) | Densitas Cairan $\rho_l$ ($\text{kg/m}^3$) | Densitas Uap $\rho_v$ ($\text{kg/m}^3$) | Panas Laten $h_{fg}$ ($\text{MJ/kg}$) | Tegangan Permukaan $\sigma$ (mN/m) | Viskositas Cair $\mu_l$ ($\mu\text{Pa}\cdot\text{s}$) | Viskositas Uap $\mu_v$ ($\mu\text{Pa}\cdot\text{s}$) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **700** | 0,082 | 874,2 | 0,00034 | 4,312 | 167,4 | 234,5 | 19,8 |
+| **750** | 0,274 | 862,1 | 0,00108 | 4,248 | 161,2 | 212,8 | 20,8 |
+| **800** | 0,782 | 849,8 | 0,00288 | 4,182 | 155,1 | 195,4 | 21,7 |
+| **850** | 1,942 | 837,4 | 0,00676 | 4,115 | 149,0 | 181,2 | 22,6 |
+| **900** | 4,321 | 824,8 | 0,01438 | 4,046 | 143,1 | 169,3 | 23,6 |
+| **950** (Nominal ISR) | **8,754** | **812,0** | **0,02784** | **3,975** | **137,8** | **159,1** | **24,5** |
+| **1000** | 16,42 | 799,1 | 0,05012 | 3,902 | 131,2 | 150,3 | 25,4 |
+| **1050** | 28,95 | 785,9 | 0,08491 | 3,827 | 125,4 | 142,6 | 26,3 |
+| **1100** | 48,24 | 772,6 | 0,1368 | 3,749 | 119,7 | 135,8 | 27,2 |
+| **1150** | 76,41 | 759,0 | 0,2112 | 3,668 | 114,1 | 129,7 | 28,1 |
+| **1200** | 115,8 | 745,2 | 0,3145 | 3,584 | 108,5 | 124,3 | 28,9 |
+
+\
+
+Tabel B.2. Sifat termofisis paduan kelongsong dan struktur teras Mo-30Re (Khandaq dkk., 2020).
+
+| Parameter Material | Nilai | Satuan | Keterangan / Sumber |
+| :--- | :--- | :--- | :--- |
+| **Komposisi Paduan** | 70 wt% Mo, 30 wt% Re | - | Paduan tahan radiasi temperatur tinggi |
+| **Massa Jenis Teoritis pada 25 °C** | 11,963 | $\text{g/cm}^3$ | Khandaq dkk. (2020) Tabel 1 |
+| **Titik Lebur Paduan** | $\sim 2790$ | °C | Tahan panas ekstrem teras |
+| **Konduktivitas Termal pada 950 K** | 58,0 | $\text{W/(m}\cdot\text{K)}$ | Digunakan pada model radial |
+| **Panas Jenis Spesifik** | 275 | $\text{J/(kg}\cdot\text{K)}$ | Temperatur tinggi |

@@ -1,0 +1,47 @@
+project:
+  type: book
+  title: "MODEL TEREDUKSI DUA FASA HEAT PIPE NATRIUM UNTUK PENDINGINAN PASIF INDONESIAN SPACE REACTOR"
+  author: "Muhammad Naufal Tamimi (20/456315/TK/50445)"
+  date: "2025"
+
+book:
+  title: "SKRIPSI - TEKNIK NUKLIR UGM"
+  subtitle: "Simulasi Aliran Dua Fasa Model Tereduksi Heat Pipe pada Mikrogravitasi, Validasi KRUSTY, dan Aplikasi pada Indonesian Space Reactor (ISR)"
+  author: "Muhammad Naufal Tamimi"
+  date: "2025"
+  chapters:
+    - index.qmd
+    - 01_pendahuluan.qmd
+    - 02_tinjauan_pustaka.qmd
+    - 03_dasar_teori.qmd
+    - 04_pelaksanaan_penelitian.qmd
+    - 05_hasil_dan_pembahasan.qmd
+    - 06_kesimpulan_dan_saran.qmd
+  appendices:
+    - lampiran_a.qmd
+    - lampiran_b.qmd
+    - lampiran_c.qmd
+
+bibliography: references.bib
+csl: ieee.csl
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+    code-fold: show
+    code-tools: true
+    math: mathjax
+  pdf:
+    documentclass: report
+    papersize: a4
+    geometry:
+      - top=30mm
+      - left=40mm
+      - right=30mm
+      - bottom=30mm
+    fontsize: 12pt
+    linestretch: 1.5
+    number-sections: true
+    toc: true

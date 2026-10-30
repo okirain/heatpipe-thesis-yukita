@@ -1,0 +1,56 @@
+# BAB I PENDAHULUAN
+
+## I.1. Latar Belakang
+
+Eksplorasi antariksa berjarak jauh (*deep space exploration*) menuju Bulan, Mars, dan planet-planet bagian luar tata surya merupakan pilar strategis dalam pengembangan sains antariksa masa depan [1, 2]. Pada misi antariksa yang menjauhi Matahari, intensitas radiasi surya mengalami penurunan drastis berbanding terbalik dengan kuadrat jarak ($1/r^2$). Kondisi ini menyebabkan panel fotovoltaik surya tidak lagi memadai sebagai pemasok daya listrik dan termal wahana antariksa, sehingga reaktor nuklir antariksa (*space nuclear reactor*) menjadi satu-satunya solusi pembangkit energi berdaya jenis tinggi, berdimensi kompak, dan beroperasi kontinu tanpa bergantung pada cahaya matahari [1, 3].
+
+Departemen Teknik Nuklir dan Teknik Fisika Universitas Gadjah Mada telah menginisiasi penelitian desain konseptual teras reaktor antariksa Indonesia atau *Indonesian Space Reactor* (ISR) [1]. Desain teras ISR dirancang menggunakan bahan bakar uranium nitrida (*uranium nitride*, UN) dengan pengayaan U-235 sebesar 55%, tersusun atas 61 pin bahan bakar berbentuk silinder berongga (*annular*) dengan kelongsong paduan molibdenum-renium (Mo-30Re) dan menghasilkan daya termal minimal sebesar 500 $\text{kW}_{\text{th}}$ hingga 1 $\text{MW}_{\text{th}}$ dengan umur operasi lebih dari 10 tahun [1]. 
+
+Pada rancangan awal ISR [1], sistem pembuangan panas dari teras reaktor mengandalkan pendingin logam cair eutektik Na-78K yang disirkulasikan secara paksa menggunakan pompa elektromagnetik (*electromagnetic pump*) melalui saluran anulus individual di bagian dalam tiap pin. Namun demikian, para perancang ISR pada Bagian 3.7 secara eksplisit menegaskan bahwa sistem sirkulasi pompa paksa pada wahana antariksa menghadapi kendala teknis krusial:
+1. Pompa mekanik atau elektromagnetik membutuhkan pasokan daya listrik kontinu dan subsistem kontrol tambahan, sehingga menambah massa total reaktor (*mass penalty*).
+2. Pergerakan dan getaran mekanis pompa (*dynamic jitter*) menginduksi gangguan akustik dan momen inersia yang merusak kestabilan orientasi (*attitude control*) dan keakuratan instrumen optik/sains presisi tinggi pada wahana antariksa dalam kondisi gayaberat mikro (*microgravity*).
+3. Saluran pendingin cair bertekanan rentan mengalami kebocoran gas selubung (*gas blanket*) dan membutuhkan sistem injeksi gas cadangan yang memperumit arsitektur wahana.
+4. Titik didih Na-78K berada pada kisaran $\sim 1000\text{ K}$, membatasi temperatur operasi reaktor maksimal pada 950 K untuk mencegah timbulnya gelembung kavitasi atau didih lokal [1].
+
+Sebagai alternatif yang sangat menjanjikan, pipa kalor (*heat pipe*) logam cair natrium diusulkan untuk menggantikan seluruh sistem pompa pendingin konvensional [1]. Pipa kalor bekerja secara pasif murni (*passive two-phase closed thermosyphon/heat pipe*) melalui siklus penguapan (*evaporation*) natrium di dalam teras, ekspansi uap berkecepatan tinggi menuju kondensor, kondensasi melepas kalor ke sistem konversi daya (seperti mesin Stirling atau AMTEC), serta sirkulasi balik cairan kembali ke evaporator oleh gaya kapiler di dalam struktur berpori (*wick*) tanpa memerlukan satu pun komponen bergerak [4, 5]. Natrium murni memiliki titik didih lebih tinggi ($\sim 1156\text{ K}$ pada 1 atm) dan panas laten penguapan sangat besar ($h_{fg} \approx 4{,}2 \times 10^6\text{ J/kg}$), memungkinkan perpindahan kalor tinggi dengan konduktivitas termal efektif puluhan ribu kali lipat lebih besar dibandingkan logam padat [6, 7].
+
+Penggunaan pipa kalor natrium telah diuji coba secara sukses di darat oleh NASA dan Departemen Energi Amerika Serikat melalui proyek KRUSTY (*Kilowatt Reactor Using Stirling Technology*) pada tahun 2018 [2, 8]. Pada reaktor KRUSTY, 8 unit pipa kalor natrium berbahan Haynes 230 dengan struktur *sintered wick* terbukti mampu mengalirkan daya termal 5 $\text{kW}_{\text{th}}$ pada temperatur operasi $\sim 800^\circ\text{C}$ (1073 K) secara stabil dan inheren aman [2].
+
+Meskipun demikian, penerapan pipa kalor pada reaktor antariksa membutuhkan pemahaman mendalam mengenai perilaku termohidrolika aliran dua fasa pada kondisi mikrogravitasi ($0g$) [9]. Ketiadaan gaya apung hidrostatik dan gaya gravitasi mengubah kesetimbangan tekanan kapiler pada meniskus pori dan batasan-batasan fisik perpindahan panas (batas kapiler, batas sonik, batas *entrainment*, dan batas mendidih). Oleh karena itu, diperlukan perancangan dan validasi suatu model tereduksi (*reduced-order numerical model*) aliran dua fasa yang komprehensif, cepat dihitung, dan akurat, yang kemudian diimplementasikan pada konfigurasi 61 pin teras ISR untuk menggantikan sistem pompa pendingin konvensional.
+
+---
+
+## I.2. Perumusan Masalah
+
+Berdasarkan latar belakang di atas, rumusan permasalahan dalam penelitian ini mencakup:
+1. Bagaimana merumuskan model numerik tereduksi 1D aliran dua fasa pipa kalor logam cair natrium yang memadukan dinamika aliran uap terkompresikan, aliran filtrasi cairan dalam struktur berpori arteri komposit (*arterial wick*), dan lima batas batas perpindahan panas Cotter-Busse pada lingkungan mikrogravitasi antariksa ($g = 0\text{ m/s}^2$)?
+2. Bagaimana tingkat akurasi dan validitas model tereduksi tersebut bila diuji dan dibandingkan terhadap data telemetri pengukuran temperatur eksperimen NASA KRUSTY (*Kilopower*)?
+3. Bagaimana karakteristik termohidrolika, batas-batas kapasitas kalor, margin keselamatan kapiler, dan distribusi temperatur ketika sistem heat pipe natrium diterapkan pada 61 pin bahan bakar teras *Indonesian Space Reactor* (ISR) 500 $\text{kW}_{\text{th}}$?
+4. Sejauh mana penggantian sistem pompa Na-78K dengan heat pipe natrium pasif mampu mereduksi massa total subsistem pendingin dan meningkatkan keselamatan inheren wahana antariksa?
+
+### I.2.1. Batasan Masalah
+
+Guna menjaga fokus dan kedalaman analisis, batasan masalah dalam penelitian ini ditetapkan sebagai berikut:
+1. Pemodelan termohidrolika heat pipe dibatasi pada formulasi model tereduksi 1 dimensi aksial pada keadaan tunak (*steady-state*) dengan fluida kerja natrium murni (Na) dan perbandingan sifat termofisis terhadap eutektik Na-78K.
+2. Kondisi gravitasi ditinjau pada dua keadaan: mikrogravitasi antariksa murni ($g = 0\text{ m/s}^2$) dan kondisi uji darat vertikal di permukaan bumi ($g = 9{,}81\text{ m/s}^2$, $\psi = 90^\circ$).
+3. Validasi model dilakukan menggunakan data sekunder resmi telemetri uji lapangan NASA KRUSTY (NASA/TM-2018-219702) pada daya 5 $\text{kW}_{\text{th}}$ dan temperatur kerja $\sim 1020\text{ K}$.
+4. Aplikasi reaktor dibatasi pada geometri dan parameter neutronik-termal teras *Indonesian Space Reactor* (ISR) 500 $\text{kW}_{\text{th}}$ yang dipublikasikan oleh Khandaq dkk. (2020) pada jurnal *Progress in Nuclear Energy*, meliputi 61 pin bahan bakar UN 55% U-235 dan kelongsong Mo-30Re.
+
+---
+
+## I.3. Tujuan Penelitian
+
+Tujuan yang hendak dicapai dalam pelaksanaan penelitian tugas akhir ini adalah:
+1. Mengembangkan kode simulasi numerik model tereduksi (*reduced-order model*) berbasis bahasa pemrograman Python untuk menganalisis dinamika aliran dua fasa dan batas-batas operasional heat pipe natrium temperatur tinggi pada lingkungan mikrogravitasi.
+2. Memvalidasi akurasi model numerik terhadap data telemetri eksperimen uji lapangan reaktor KRUSTY NASA melalui evaluasi parameter statistik $R^2$, *Root Mean Square Error* (RMSE), dan galat temperatur relatif.
+3. Menganalisis kinerja termohidrolika integrasi heat pipe natrium mandiri pada 61 pin bahan bakar teras ISR 500 $\text{kW}_{\text{th}}$, meliputi profil distribusi temperatur aksial, variasi tekanan fasa uap dan cair, serta margin keselamatan terhadap batas kapiler, sonik, *entrainment*, dan mendidih.
+4. Mengkuantifikasi manfaat penggantian sistem sirkulasi pompa Na-78K dengan heat pipe natrium dari aspek efisiensi massa (*subsystem mass reduction*), eliminasi sumber getaran mekanis, dan peningkatan keandalan pasif teras reaktor.
+
+---
+
+## I.4. Manfaat Penelitian
+
+Hasil penelitian ini diharapkan memberikan manfaat teoretis dan praktis sebagai berikut:
+1. **Manfaat Akademis:** Memperkaya khazanah keilmuan termohidrolika reaktor antariksa dan mekanika fluida dua fasa logam cair di Indonesia, khususnya di lingkungan Departemen Teknik Nuklir dan Teknik Fisika UGM, melalui tersedianya kode simulasi mandiri yang fleksibel dan terverifikasi secara ilmiah.
+2. **Manfaat Rekayasa Desain:** Memberikan kontribusi nyata berupa modifikasi desain pendingin teras *Indonesian Space Reactor* (ISR) dari sistem pompa aktif menjadi sistem pendingin pasif murni, menyelesaikan salah satu rekomendasi pengembangan utama yang tertuang pada publikasi ISR tahun 2020.
+3. **Manfaat Pengembangan Teknologi Nasional:** Mendukung peta jalan (*roadmap*) penguasaan teknologi energi nuklir antariksa nasional yang berorientasi pada keselamatan inheren tinggi, bebas risiko kebocoran radioaktif aktif, dan memiliki keandalan jangka panjang untuk misi eksplorasi luar angkasa masa depan.

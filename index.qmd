@@ -1,0 +1,223 @@
+# PRAKATA DAN KELENGKAPAN AWAL {.unnumbered}
+
+::: {.text-center}
+## MODEL TEREDUKSI DUA FASA HEAT PIPE NATRIUM UNTUK PENDINGINAN PASIF INDONESIAN SPACE REACTOR {.unnumbered}
+
+**SKRIPSI**
+
+untuk memenuhi sebagian persyaratan  
+untuk memperoleh derajat Sarjana  
+Program Studi Teknik Nuklir
+
+Diajukan oleh:
+
+**MUHAMMAD NAUFAL TAMIMI**  
+**20/456315/TK/50445**
+
+Kepada  
+**DEPARTEMEN TEKNIK NUKLIR DAN TEKNIK FISIKA**  
+**FAKULTAS TEKNIK**  
+**UNIVERSITAS GADJAH MADA**  
+**YOGYAKARTA**  
+**2025**
+:::
+
+\newpage
+
+# PERNYATAAN BEBAS PLAGIASI {.unnumbered}
+
+Saya yang bertanda tangan di bawah ini:
+
+| Data Mahasiswa | Keterangan |
+| :--- | :--- |
+| **Nama** | Muhammad Naufal Tamimi |
+| **NIM** | 20/456315/TK/50445 |
+| **Tahun Terdaftar** | 2020 |
+| **Program Studi** | Teknik Nuklir |
+| **Departemen** | Departemen Teknik Nuklir dan Teknik Fisika |
+| **Fakultas** | Fakultas Teknik, Universitas Gadjah Mada |
+
+menyatakan bahwa dokumen ilmiah skripsi ini tidak terdapat bagian dari karya ilmiah lain yang telah diajukan untuk memperoleh gelar akademik di suatu lembaga Pendidikan Tinggi, dan juga tidak terdapat karya atau pendapat yang pernah ditulis atau diterbitkan oleh orang/lembaga lain, kecuali yang secara tertulis disitasi dalam dokumen ini dan disebutkan sumbernya secara lengkap dalam daftar pustaka.
+
+Dengan demikian saya menyatakan bahwa dokumen ilmiah ini bebas dari unsur-unsur plagiasi dan apabila dokumen ilmiah Skripsi ini di kemudian hari terbukti merupakan plagiasi dari hasil karya penulis lain dan/atau dengan sengaja mengajukan karya atau pendapat yang merupakan hasil karya penulis lain, maka penulis bersedia menerima sanksi akademik dan/atau sanksi hukum yang berlaku.
+
+Yogyakarta, 29 Oktober 2025
+
+::: {.border .p-4 .w-64 .text-center .mx-auto}
+Materai ASLI (e-Meterai)  
+Rp. 10.000  
+dan tanda tangan
+:::
+
+**Muhammad Naufal Tamimi**  
+NIM. 20/456315/TK/50445
+
+\newpage
+
+# HALAMAN PENGESAHAN {.unnumbered}
+
+::: {.text-center}
+**SKRIPSI**
+
+**MODEL TEREDUKSI DUA FASA HEAT PIPE NATRIUM UNTUK PENDINGINAN PASIF INDONESIAN SPACE REACTOR**
+
+| Tim Penyusun dan Penguji | Nama dan Keterangan |
+| :--- | :--- |
+| **Nama Mahasiswa** | Muhammad Naufal Tamimi |
+| **Nomor Mahasiswa** | 20/456315/TK/50445 |
+| **Program Studi** | Teknik Nuklir |
+| **Pembimbing Utama** | Dr. Ir. Alexander Agung, S.T., M.Sc., IPU |
+| **Pembimbing Pendamping** | Ir. Andang Widi Harto, M.T., Ph.D. |
+
+Skripsi ini telah dipertahankan di depan Tim Penguji pada tanggal ujian yang ditentukan.
+:::
+
+Skripsi ini telah diterima dan dinyatakan memenuhi syarat kelulusan pada Departemen Teknik Nuklir dan Teknik Fisika, Fakultas Teknik UGM.
+
+Mengetahui,  
+**Ketua Departemen Teknik Nuklir dan Teknik Fisika**  
+**Fakultas Teknik UGM**
+
+\
+\
+**Dr. Ir. Alexander Agung, S.T., M.Sc., IPU**  
+NIP. 19720916 199803 1002
+
+\newpage
+
+# HALAMAN PERSEMBAHAN & MOTTO {.unnumbered}
+
+> *"Karya ini kupersembahkan untuk kedua orang tua, keluarga besar, almamater Departemen Teknik Nuklir dan Teknik Fisika Universitas Gadjah Mada, serta kemajuan ilmu rekayasa antariksa dan energi nuklir damai bangsa Indonesia."*
+
+\
+
+> *"Perjalanan terjauh dimulai dari perhitungan paling teliti; keberanian menjelajah antariksa lahir dari penguasaan hukum-hukum termodinamika alam semesta."*
+
+\newpage
+
+# KATA PENGANTAR {.unnumbered}
+
+Puji dan syukur ke hadirat Tuhan Yang Maha Esa atas segala rahmat, hidayah, dan kekuatan yang dilimpahkan sehingga penyusunan skripsi berjudul *"Model Tereduksi Dua Fasa Heat Pipe Natrium untuk Pendinginan Pasif Indonesian Space Reactor"* dapat diselesaikan dengan baik dan terarah.
+
+Penelitian ini memfokuskan pada pemodelan numerik tereduksi (*reduced-order model*) dinamika aliran dua fasa pada pipa kalor (*heat pipe*) logam cair natrium temperatur tinggi dalam kondisi mikrogravitasi luar angkasa ($0g$). Model yang dikembangkan divalidasi terhadap data telemetri lapangan eksperimen NASA KRUSTY (*Kilowatt Reactor Using Stirling Technology*), lalu diaplikasikan secara komprehensif pada rancangan teras *Indonesian Space Reactor* (ISR) 500 kWth untuk menggantikan sistem pompa paksa konvensional Na-78K sebagaimana direkomendasikan pada studi desain awal.
+
+Penulis menyampaikan apresiasi dan terima kasih sebesar-besarnya kepada:
+1. **Dr. Ir. Alexander Agung, S.T., M.Sc., IPU**, selaku Ketua Departemen Teknik Nuklir dan Teknik Fisika FT UGM sekaligus dosen pembimbing atas arahan, bimbingan akademis, dan diskusi teoretik yang mendalam.
+2. Seluruh dosen dan staf pengajar Departemen Teknik Nuklir dan Teknik Fisika FT UGM yang telah membekali penulis dengan dasar-dasar ilmu rekayasa nuklir, termohidrolika, dan metode komputasi.
+3. Kedua orang tua dan keluarga atas doa, dorongan moral, dan kesabaran tanpa henti selama masa perkuliahan.
+4. Rekan-rekan mahasiswa Teknik Nuklir angkatan 2020 atas kebersamaan dan diskusi konstruktif.
+
+Yogyakarta, Oktober 2025  
+**Muhammad Naufal Tamimi**
+
+\newpage
+
+# DAFTAR LAMBANG DAN SINGKATAN {.unnumbered}
+
+### Lambang Romawi
+| Lambang | Kuantitas | Satuan |
+| :--- | :--- | :--- |
+| $A$ | Luas penampang | $\text{m}^2$ |
+| $c_s$ | Kecepatan suara uap natrium | $\text{m/s}$ |
+| $D$ | Diameter | $\text{m}$ |
+| $g$ | Percepatan gravitasi | $\text{m/s}^2$ |
+| $h_{fg}$ | Panas laten penguapan | $\text{J/kg}$ |
+| $K$ | Permeabilitas struktur berpori (*wick*) | $\text{m}^2$ |
+| $k$ | Konduktivitas termal | $\text{W/(m}\cdot\text{K)}$ |
+| $L$ | Panjang bagian heat pipe | $\text{m}$ |
+| $\dot{m}$ | Laju alir massa fluida | $\text{kg/s}$ |
+| $P$ | Tekanan | $\text{Pa}$ |
+| $Q$ | Laju perpindahan panas | $\text{W}$ |
+| $R$ | Konstanta gas spesifik uap | $\text{J/(kg}\cdot\text{K)}$ |
+| $r_c$ | Jari-jari kelengkungan meniskus | $\text{m}$ |
+| $r_{eff}$ | Jari-jari pori kapiler efektif | $\text{m}$ |
+| $T$ | Temperatur | $\text{K}$ |
+| $v$ | Kecepatan fluida | $\text{m/s}$ |
+
+### Lambang Yunani
+| Lambang | Kuantitas | Satuan |
+| :--- | :--- | :--- |
+| $\gamma$ | Rasio panas jenis gas ideal ($c_p/c_v$) | - |
+| $\varepsilon$ | Porositas struktur kapiler (*wick*) | - |
+| $\mu$ | Viskositas dinamik | $\text{Pa}\cdot\text{s}$ |
+| $\rho$ | Densitas massa | $\text{kg/m}^3$ |
+| $\sigma$ | Tegangan permukaan cairan | $\text{N/m}$ |
+| $\psi$ | Sudut inklinasi terhadap bidang horizontal | derajat |
+
+### Subskrip dan Superskrip
+| Notasi | Deskripsi |
+| :--- | :--- |
+| $a$ | Bagian adiabatik (*adiabatic section*) |
+| $c$ | Bagian kondensor (*condenser section*) |
+| $cap$ | Kapiler (*capillary*) |
+| $e$ | Bagian evaporator (*evaporator section*) |
+| $eff$ | Efektif |
+| $l$ | Fase cair (*liquid*) |
+| $sat$ | Kejenuhan (*saturation*) |
+| $v$ | Fase uap (*vapor*) |
+| $w$ | Dinding wadah atau struktur wick |
+
+### Singkatan
+| Singkatan | Kepanjangan |
+| :--- | :--- |
+| AMTEC | *Alkali Metal Thermal-to-Electric Converter* |
+| BOL | *Beginning of Life* |
+| HEU | *Highly Enriched Uranium* |
+| ISR | *Indonesian Space Reactor* |
+| KRUSTY | *Kilowatt Reactor Using Stirling Technology* |
+| NASA | *National Aeronautics and Space Administration* |
+| ROM | *Reduced-Order Model* |
+| SSA | *Spectral Shift Absorber* |
+| UN | *Uranium Nitride* |
+
+\newpage
+
+# INTISARI {.unnumbered}
+
+::: {.text-center}
+**MODEL TEREDUKSI DUA FASA HEAT PIPE NATRIUM UNTUK PENDINGINAN PASIF INDONESIAN SPACE REACTOR**
+
+**Muhammad Naufal Tamimi**  
+**20/456315/TK/50445**
+
+Diajukan kepada Departemen Teknik Nuklir dan Teknik Fisika Fakultas Teknik  
+Universitas Gadjah Mada pada tanggal 29 Oktober 2025  
+untuk memenuhi sebagian persyaratan untuk memperoleh derajat  
+Sarjana Program Studi Teknik Nuklir
+:::
+
+**INTISARI**
+
+Eksplorasi antariksa berjarak jauh memerlukan sistem pembangkit daya kompak berkeandalan tinggi tanpa ketergantungan sinar matahari. Konseptual *Indonesian Space Reactor* (ISR) 500 kWth sebelumnya mengusulkan pendinginan logam cair Na-78K sirkulasi pompa paksa yang rentan kegagalan mekanik serta menghasilkan getaran akustik bagi wahana antariksa. Oleh karena itu, penelitian ini bertujuan mengembangkan simulator model tereduksi (*reduced-order model*) aliran dua fasa pada pipa kalor (*heat pipe*) natrium pasif temperatur tinggi dalam kondisi mikrogravitasi luar angkasa ($0g$).
+
+Metodologi penelitian dibangun berbasis formulasi persamaan kekekalan massa, momentum uap 1D Navier-Stokes, dan aliran filtrasi cairan dalam struktur berpori arteri komposit (*arterial wick*) menggunakan hukum Darcy. Model mengintegrasikan lima batas operasional fisik Cotter dan Busse (batas kapiler, sonik, *entrainment*, mendidih, dan viskos). Model divalidasi terhadap data uji telemetri 8 termokopel aksial dari reaktor eksperimen NASA KRUSTY (*Kilowatt Reactor Using Stirling Technology*) daya 5 kWt pada temperatur kerja 1020 K.
+
+Hasil validasi menunjukkan kesesuaian sangat tinggi terhadap data eksperimen NASA KRUSTY dengan $R^2 = 0,949$, RMSE sebesar 3,12 K, dan galat relatif maksimum di bawah 0,6%. Penerapan model pada teras ISR 61 pin bahan bakar UN menghasilkan daya batas kapiler 253,1 kW per pin pada kondisi mikrogravitasi ($0g$), menghasilkan faktor keselamatan 24,7 kali di atas beban puncak pin (10,25 kWth). Penggantian sistem pompa dengan 61 heat pipe natrium mereduksi massa subsistem sebesar 22,77 kg (penghematan 32,0%) dan mengeliminasi total getaran mekanik pada wahana antariksa.
+
+**Kata kunci:** *Heat pipe*, Aliran dua fasa, Natrium, Mikrogravitasi, KRUSTY, Indonesian Space Reactor
+
+\newpage
+
+# ABSTRACT {.unnumbered}
+
+::: {.text-center}
+**REDUCED-ORDER TWO-PHASE SODIUM HEAT PIPE NUMERICAL MODEL FOR PASSIVE COOLING OF THE INDONESIAN SPACE REACTOR**
+
+**Muhammad Naufal Tamimi**  
+**20/456315/TK/50445**
+
+Submitted to the Department of Nuclear Engineering and Engineering Physics  
+Faculty of Engineering, Universitas Gadjah Mada on October 29, 2025  
+in partial fulfillment of the requirement for the Degree of  
+Bachelor of Engineering in Nuclear Engineering
+:::
+
+**ABSTRACT**
+
+Deep space exploration requires compact and highly reliable electrical power sources independent of solar radiation. The conceptual 500 kWth Indonesian Space Reactor (ISR) previously proposed forced Na-78K liquid metal pumped loop cooling, which introduces single-point mechanical failure vulnerabilities and acoustic vibrations detrimental to spacecraft attitude control. Therefore, this study aims to formulate a reduced-order two-phase numerical simulator for high-temperature sodium heat pipes under microgravity conditions ($0g$) to establish a fully passive, fault-tolerant reactor cooling system.
+
+The methodology couples 1D vapor Navier-Stokes momentum equations with Darcy porous filtration in composite arterial capillary wicks. The formulation integrates all five governing Cotter and Busse operational boundaries (capillary, sonic, entrainment, boiling, and viscous limits). Numerical verification is performed by benchmarking axial temperature profiles against published experimental telemetry data from the NASA KRUSTY (*Kilowatt Reactor Using Stirling Technology*) 5 kWt test at 1020 K.
+
+Validation results exhibit remarkable agreement with NASA KRUSTY field data, achieving an $R^2$ of 0.949, an RMSE of 3.12 K, and maximum relative errors below 0.6%. Implementation of the validated solver on the 61-pin UN-fueled ISR core yields a microgravity capillary heat transport limit of 253.1 kW per pin, providing a safety margin of 24.7 times over the peak pin power (10.25 kWth). Replacing the conventional pump system with 61 passive sodium heat pipes achieves a 22.77 kg mass reduction (32.0% subsystem saving) while entirely eliminating mechanical noise and jitter.
+
+**Keywords:** Heat pipe, Two-phase flow, Liquid sodium, Microgravity, KRUSTY, Indonesian Space Reactor

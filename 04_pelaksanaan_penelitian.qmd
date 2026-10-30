@@ -1,0 +1,124 @@
+# BAB IV PELAKSANAAN PENELITIAN
+
+## IV.1. Alat dan Bahan Penelitian
+
+Pelaksanaan penelitian ini dilakukan melalui pendekatan komputasi numerik dan pemodelan matematis analitik-terdiskritisasi.
+
+### IV.1.1. Perangkat Keras dan Perangkat Lunak
+
+Perangkat yang digunakan dalam penelitian ini meliputi:
+1. **Perangkat Keras (*Hardware*):**
+   - Komputer pemroses dengan prosesor multi-inti arsitektur x86_64 berkecepatan 2,8 GHz.
+   - Memori akses acak (RAM) berkapasitas 16 GB DDR4.
+   - Media penyimpanan berbasis *Solid State Drive* (SSD) berkapasitas 512 GB.
+2. **Perangkat Lunak (*Software*):**
+   - Sistem operasi Linux (Ubuntu 22.04 LTS / Debian-based environment).
+   - Bahasa pemrograman Python versi 3.10.12 dengan pustaka standar komputasi numerik (`math`, `json`, `dataclasses`, `typing`, `sys`, `os`).
+   - Kode simulator model tereduksi mandiri yang dikembangkan: `heatpipe_rom.py`.
+   - Perangkat visualisasi dan pengolah dokumen ilmiah Quarto v1.4 serta mesin typesetting LaTeX/MathJax.
+
+### IV.1.2. Bahan Penelitian
+
+Bahan yang digunakan dalam penelitian ini adalah data parameter teknik, sifat termofisis material nuklir, dan data telemetri eksperimen sekunder resmi yang meliputi:
+1. **Data Desain Teras Indonesian Space Reactor (ISR):**
+   Diambil dari publikasi Khandaq, Harto, dan Agung (2020) di *Progress in Nuclear Energy* [1], meliputi daya teras 500 $\text{kW}_{\text{th}}$, 61 pin bahan bakar UN silinder berongga (pengayaan 55% U-235), kelongsong Mo-30Re, tinggi aktif bahan bakar 25 cm, diameter pin 3,265 cm, serta rentang temperatur operasi 750 K–950 K.
+2. **Data Eksperimen NASA KRUSTY (Kilopower):**
+   Diambil dari laporan teknis NASA/TM-2018-219702 oleh Briggs, Gibson, dan Sanzi (2018) [2], mencakup geometri 8 unit pipa kalor natrium Haynes 230, daya termal 625 W per pipa kalor, dan data pengukuran 8 titik termokopel aksial pada evaporator, zona adiabatik, dan kondensor.
+3. **Data Sifat Termofisis Material:**
+   Korelasi analitik densitas, tekanan jenuh uap, viskositas, tegangan permukaan, panas laten, dan konduktivitas termal natrium cair dan uap bersumber dari Argonne National Laboratory (ANL-RE-95-2) [6] dan buku pegangan Foust (1972) [15].
+
+---
+
+## IV.2. Tata Laksana Penelitian
+
+Tahapan pelaksanaan penelitian dirancang secara sistematis dengan urutan langkah kerja sebagai berikut:
+
+```
+[Mulai Penelitian]
+       │
+       ▼
+[Kompilasi Sifat Termofisis Natrium & Geometri Pipa Kalor]
+       │
+       ▼
+[Diskretisasi Spasial 1D Aksial (N = 60 - 100 Grid Node)]
+       │
+       ▼
+[Penyelesaian Persamaan Kekekalan Massa & Momentum Uap 1D]
+       │
+       ▼
+[Penyelesaian Aliran Cairan Darcy pada Arteri Struktur Wick]
+       │
+       ▼
+[Evaluasi Kesetimbangan Tekanan Kapiler & Kelengkungan Meniskus]
+       │
+       ▼
+[Perhitungan 5 Batas Operasi: Kapiler, Sonik, Entrainment, Didih, Viskos]
+       │
+       ▼
+[Validasi Model vs Data Uji Lapangan KRUSTY NASA (8 Termokopel)]
+       │
+   [Valid?] ──Tidak──► [Kalibrasi Model Hambatan Antarmuka & Efek Inersia]
+       │ Ya
+       ▼
+[Aplikasi Model pada 61 Pin Teras ISR 500 kWth (Kondisi Mikrogravitasi 0g)]
+       │
+       ▼
+[Analisis Komparatif: Sistem Pompa Na-78K vs Heat Pipe Pasif Natrium]
+       │
+       ▼
+[Penyusunan Laporan Skripsi & Dokumentasi Teknis Quarto]
+       │
+       ▼
+[Selesai]
+```
+
+Langkah-langkah terperinci dalam algoritma numerik simulator meliputi:
+1. **Inisialisasi Geometri dan Properti:**
+   Menentukan dimensi $L_e$, $L_a$, $L_c$, $r_o$, $t_{wall}$, $t_{wick}$, $r_{eff}$, serta sifat-sifat termofisis natrium pada temperatur evaluasi nominal $T_{op}$.
+2. **Diskretisasi Domain 1D:**
+   Domain aksial sepanjang $L_{total}$ dibagi menjadi $N$ volume kontrol berjarak $\Delta x = L_{total} / (N - 1)$.
+3. **Integrasi Profil Aliran Massa:**
+   Menghitung distribusi laju alir massa lokal $\dot{m}_v(x)$ berdasarkan profil fluks panas aksial (bentuk kosinus pada evaporator teras reaktor).
+4. **Integrasi Medan Tekanan Fasa Uap:**
+   Menghitung penurunan tekanan uap secara *forward integration* dari $x = 0$ hingga $x = L_{total}$ dengan memperhitungkan faktor gesek fasa kental dan perolehan tekanan momentum $\beta$ di zona kondensor.
+5. **Integrasi Medan Tekanan Fasa Cair:**
+   Menghitung profil tekanan cairan secara *backward integration* dari ujung kondensor ($x = L_{total}$) di mana meniskus cairan mengalami relaksasi ($P_l \approx P_v$), menuju ujung evaporator menggunakan hukum Darcy atau formulasi Hagen-Poiseuille untuk arteri komposit.
+6. **Penentuan Jari-Jari Kelengkungan Meniskus:**
+   Mengevaluasi kelengkungan meniskus lokal $r_c(x) = \frac{2\sigma}{P_v(x) - P_l(x)}$ di setiap node. Jika ditemukan $r_c(x) < r_{eff}$, maka kondisi *capillary dryout* terdeteksi.
+7. **Perhitungan Kurva Batas Operasi Termal:**
+   Menghitung $Q_{cap}(T)$, $Q_{sonic}(T)$, $Q_{ent}(T)$, $Q_{boil}(T)$, dan $Q_{visc}(T)$ pada rentang temperatur 650 K hingga 1250 K dengan kenaikan 25 K.
+8. **Benchmarking KRUSTY NASA:**
+   Memasukkan parameter uji KRUSTY ($Q = 625\text{ W}$, $g = 9{,}81\text{ m/s}^2$, $\psi = 90^\circ$), mengekstraksi temperatur model pada lokasi koordinat termokopel riil, dan menghitung residual galat statistik.
+9. **Simulasi Teras ISR Mikrogravitasi ($0g$):**
+   Memasukkan beban kalor rata-rata pin ($8{,}20\text{ kW}_{\text{th}}$) dan beban puncak pin ($10{,}25\text{ kW}_{\text{th}}$) dengan percepatan gravitasi $g = 0\text{ m/s}^2$ untuk mengevaluasi margin keselamatan termal teras ISR.
+
+---
+
+## IV.3. Rencana Analisis Hasil Penelitian
+
+Hasil simulasi numerik diolah dan dianalisis menggunakan metode kuantitatif yang mencakup:
+
+### 1. Evaluasi Statistik Validasi Model
+Kesesuaian antara hasil prediksi model numerik dan data pengukuran empiris NASA KRUSTY diuji menggunakan parameter:
+- **Root Mean Square Error (RMSE):**
+  $$\text{RMSE} = \sqrt{\frac{1}{N_{TC}} \sum_{i=1}^{N_{TC}} \left( T_{model,i} - T_{exp,i} \right)^2} \tag{4.1}$$
+- **Koefisien Determinasi ($R^2$):**
+  $$R^2 = 1 - \frac{\sum_{i=1}^{N_{TC}} (T_{exp,i} - T_{model,i})^2}{\sum_{i=1}^{N_{TC}} (T_{exp,i} - \bar{T}_{exp})^2} \tag{4.2}$$
+- **Galat Persentase Mutlak Rata-rata (*Mean Absolute Percentage Error*, MAPE):**
+  $$\text{MAPE} = \frac{1}{N_{TC}} \sum_{i=1}^{N_{TC}} \left| \frac{T_{model,i} - T_{exp,i}}{T_{exp,i}} \right| \times 100\% \tag{4.3}$$
+
+### 2. Analisis Perbandingan Pengaruh Gravitasi ($0g$ vs $1g$)
+Mengevaluasi perbedaan batas kapiler $Q_{cap}$ dan profil kelengkungan meniskus cairan antara kondisi pengujian darat vertikal di permukaan bumi ($1g$, $\psi = 90^\circ$) dan kondisi operasi sesungguhnya di orbit antariksa ($0g$).
+
+### 3. Evaluasi Margin Keselamatan Termohidrolika Teras ISR
+Menghitung faktor margin keselamatan kapiler (*capillary safety margin*) $SF_{cap}$ pada beban puncak pin bahan bakar:
+
+$$SF_{cap} = \frac{Q_{cap}(T_{op})}{Q_{peak,pin}} \tag{4.4}$$
+
+Kriteria perancangan terpenuhi apabila $SF_{cap} \ge 1{,}50$ pada kondisi mikrogravitasi.
+
+### 4. Analisis Teknis Komparasi Subsistem Pendingin Teras ISR
+Membandingkan secara komparatif parameter subsistem pendingin antara desain awal sirkulasi pompa Na-78K (Khandaq dkk., 2020) dan desain usulan 61 pipa kalor natrium mandiri, mencakup:
+- Pengurangan massa total subsistem pendingin (*mass savings*).
+- Penghilangan getaran mekanik dan gangguan akustik (*zero mechanical jitter*).
+- Toleransi kerusakan pin (*single pin fault-tolerance*) terhadap reaktivitas teras.

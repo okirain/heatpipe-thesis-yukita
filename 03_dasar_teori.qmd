@@ -1,0 +1,155 @@
+# BAB III DASAR TEORI
+
+## III.1. Isi Dasar Teori
+
+Dasar teori ini menjembatani perumusan masalah termohidrolika pendinginan pasif teras reaktor antariksa dengan metodologi komputasi model tereduksi. Formulasi matematika didasarkan pada hukum kekekalan massa, momentum, dan energi fluida dua fasa logam cair pada geometri silinder sirkular, kesetimbangan kapiler Laplace-Young, hidrodinamika filtrasi Darcy pada media berpori, serta batasan-batasan batas operasional Cotter dan Busse.
+
+### III.1.1. Termodinamika dan Sifat Termofisis Logam Cair Natrium
+
+Natrium elemental (Na) merupakan fluida kerja logam cair ideal untuk rentang temperatur 850 K hingga 1250 K. Hubungan tekanan jenuh uap natrium $P_{sat}$ terhadap temperatur absolut $T$ dihitung menggunakan korelasi Fink dan Leibowitz [6]:
+
+$$\ln(P_{sat}\ [\text{MPa}]) = 11{,}9463 - \frac{12633{,}73}{T} - 0{,}4672 \ln(T) \tag{3.1}$$
+
+Densitas fasa cair $\rho_l$ dan uap $\rho_v$ natrium dievaluasi berdasarkan persamaan keadaan termodinamika [6]:
+
+$$\rho_l(T) = 1014{,}0 - 0{,}235 (T - 273{,}15) - 3{,}0 \times 10^{-5} (T - 273{,}15)^2 \tag{3.2}$$
+
+$$\rho_v(T) = \frac{P_{sat}(T)}{R_{eff} T} \tag{3.3}$$
+
+dengan $R_{eff} = R_u / M_{eff}$ merupakan konstanta gas spesifik yang telah memperhitungkan fraksi pembentukan dimer natrium ($\text{Na}_2$) pada fasa gas. Panas laten penguapan $h_{fg}(T)$ dan tegangan permukaan $\sigma(T)$ mengikuti persamaan scaling Guggenheim-Katayama terhadap temperatur kritis natrium ($T_{crit} = 2503{,}7\text{ K}$) [6]:
+
+$$h_{fg}(T) = 4{,}65 \times 10^6 \left(1 - \frac{T}{T_{crit}}\right)^{0{,}41} \tag{3.4}$$
+
+$$\sigma(T) = 0{,}2405 \left(1 - \frac{T}{T_{crit}}\right)^{1{,}12} \tag{3.5}$$
+
+Viskositas dinamik cairan natrium $\mu_l(T)$ dan uap $\mu_v(T)$ dinyatakan sebagai [6]:
+
+$$\ln(\mu_l\ [\text{mPa}\cdot\text{s}]) = -2{,}48 + \frac{720{,}0}{T} \tag{3.6}$$
+
+$$\mu_v(T) = 1{,}8 \times 10^{-7} T^{0{,}72} \tag{3.7}$$
+
+---
+
+### III.1.2. Model Aliran Uap 1D Aksial (Navier-Stokes Tereduksi)
+
+Pada inti saluran uap pipa kalor berjejari $r_v$, laju alir massa uap $\dot{m}_v(x)$ bervariasi secara aksial sepanjang pipa kalor berpanjang total $L_{total} = L_e + L_a + L_c$:
+
+$$\dot{m}_v(x) = \begin{cases} 
+\frac{Q}{h_{fg}} \frac{x}{L_e}, & 0 \le x \le L_e \\
+\frac{Q}{h_{fg}}, & L_e < x \le L_e + L_a \\
+\frac{Q}{h_{fg}} \left(1 - \frac{x - L_e - L_a}{L_c}\right), & L_e + L_a < x \le L_{total}
+\end{cases} \tag{3.8}$$
+
+Kecepatan rata-rata uap $v_v(x)$ dan bilangan Reynolds uap $Re_v(x)$ didefinisikan sebagai:
+
+$$v_v(x) = \frac{\dot{m}_v(x)}{\rho_v \pi r_v^2} \tag{3.9}$$
+
+$$Re_v(x) = \frac{2 \rho_v v_v(x) r_v}{\mu_v} \tag{3.10}$$
+
+Gradien tekanan aksial uap $\frac{dP_v}{dx}$ diturunkan dari persamaan momentum Navier-Stokes 1D yang mengintegrasikan gesekan dinding fasa kental dan efek perlambatan inersia:
+
+$$\frac{dP_v}{dx} = - f_v \frac{\rho_v v_v(x)^2}{4 r_v} - \beta \frac{d(\rho_v v_v^2)}{dx} \tag{3.11}$$
+
+dengan faktor gesek Darcy $f_v$ bernilai $64 / Re_v$ untuk aliran laminer ($Re_v < 2300$) dan $0{,}316 / Re_v^{0{,}25}$ untuk aliran turbulen [7, 14]. Parameter $\beta$ merepresentasikan koefisien perolehan kembali tekanan momentum (*pressure recovery factor*) di zona kondensor ($\beta \approx 0{,}65$) akibat perlambatan fluida saat mengembun [5, 7].
+
+---
+
+### III.1.3. Model Aliran Cairan Balik pada Struktur Kapiler (Hukum Darcy)
+
+Fasa cair yang mengembun pada kondensor ditarik kembali menuju evaporator melalui celah mikro struktur kapiler (*wick*). Aliran filtrasi cairan kental berkecepatan rendah melalui matriks berpori mengikuti persamaan Darcy [5, 7]:
+
+$$\frac{dP_l}{dx} = \frac{\mu_l \dot{m}_l(x)}{\rho_l A_w K} + \rho_l g \sin\psi \tag{3.12}$$
+
+di mana $A_w = \pi (r_{w,in}^2 - r_v^2)$ adalah luas penampang basah wick, $K$ adalah permeabilitas intrinsik media berpori, dan $\psi$ adalah sudut kemiringan terhadap bidang horizontal.
+
+Untuk aplikasi reaktor berdaya tinggi ($> 5\text{ kW}_{\text{th}}$ per pin), struktur kapiler komposit berarteri (*arterial wick*) diaplikasikan. Pada struktur ini, aliran cairan aksial utama bergerak melalui $n_a$ buah saluran arteri pipa halus berjejari $r_a$ dengan tahanan viskos Hagen-Poiseuille yang sangat rendah [7]:
+
+$$\left(\frac{dP_l}{dx}\right)_{arteri} = \frac{8 \mu_l \dot{m}_l(x)}{n_a \pi r_a^4 \rho_l} \tag{3.13}$$
+
+Distribusi cairan secara sirkumferensial ke dinding panas selanjutnya dilayani oleh lapisan tipis *screen mesh* berpori halus [4, 7].
+
+---
+
+### III.1.4. Kesetimbangan Kapiler Laplace-Young dan Efek Mikrogravitasi
+
+Pada antarmuka cairan-uap di sepanjang permukaan struktur berpori, perbedaan tekanan lokal antara fasa uap $P_v(x)$ dan fasa cair $P_l(x)$ diimbangi oleh kelengkungan meniskus kapiler sesuai hukum Laplace-Young:
+
+$$P_v(x) - P_l(x) = \frac{2 \sigma(T)}{r_c(x)} \tag{3.14}$$
+
+dengan $r_c(x)$ merupakan jari-jari kelengkungan meniskus lokal. Agar pipa kalor dapat beroperasi stabil tanpa mengalami pengeringan cairan (*dryout*), jari-jari kelengkungan meniskus terkecil di ujung evaporator harus lebih besar atau sama dengan jari-jari pori efektif wick ($r_c \ge r_{eff}$). Hal ini menetapkan syarat batas kapiler:
+
+$$\Delta P_{cap, max} = \frac{2 \sigma}{r_{eff}} \ge \Delta P_v + \Delta P_l + \Delta P_g \tag{3.15}$$
+
+Pada lingkungan antariksa dengan mikrogravitasi murni ($g = 0\text{ m/s}^2$):
+
+$$\Delta P_g = \rho_l g L_{total} \sin\psi = 0 \tag{3.16}$$
+
+Eliminasi total komponen tekanan gravitasi $\Delta P_g$ ini mengeliminasi penalti hidrostatik yang selama ini membatasi kapasitas pipa kalor saat diuji secara vertikal di darat, sehingga meningkatkan batas daya kapiler secara signifikan [7, 9].
+
+---
+
+### III.1.5. Batas-Batas Operasi Fisik Heat Pipe (Cotter & Busse Limits)
+
+Kapasitas perpindahan kalor maksimum pipa kalor dibatasi oleh nilai minimum dari lima batasan fisik independen [4, 5, 6, 7]:
+
+#### 1. Batas Kapiler (*Capillary Limit*, $Q_{cap}$)
+Ditentukan oleh kemampuan gaya tegangan permukaan mengimbangi tahanan gesek total:
+
+$$Q_{cap} = \frac{\frac{2\sigma}{r_{eff}} - \Delta P_g}{F_l + F_v} \tag{3.17}$$
+
+dengan koefisien tahanan fasa cair $F_l = \frac{\mu_l L_{eff}}{\rho_l A_w K h_{fg}}$ dan fasa uap $F_v = \frac{8 \mu_v L_{eff}}{\pi r_v^4 \rho_v h_{fg}}$, serta panjang efektif $L_{eff} = 0{,}5 L_e + L_a + 0{,}5 L_c$.
+
+#### 2. Batas Sonik (*Sonic Limit*, $Q_{sonic}$)
+Berdasarkan teori Busse dan Levy, laju perpindahan panas dibatasi ketika kecepatan uap pada pintu keluar evaporator mencapai kecepatan suara ($Ma = 1$) [5]:
+
+$$Q_{sonic} = A_v \rho_v h_{fg} \sqrt{\frac{\gamma R T_v}{2(\gamma + 1)}} \tag{3.18}$$
+
+#### 3. Batas Entrainment (*Entrainment Limit*, $Q_{ent}$)
+Gaya geser uap kecepatan tinggi mengikis butiran cairan dari permukaan wick saat bilangan Weber antarmuka $We \ge 1$ sesuai korelasi Cotter [4]:
+
+$$Q_{ent} = A_v h_{fg} \sqrt{\frac{\sigma \rho_v}{2 r_{h,w}}} \tag{3.19}$$
+
+dengan $r_{h,w}$ adalah jari-jari hidrolik permukaan pori wick.
+
+#### 4. Batas Mendidih (*Boiling Limit*, $Q_{boil}$)
+Terjadi ketika superheat radial dinding evaporator melebihi batas pembentukan gelembung nukleasi kritis [7]:
+
+$$Q_{boil} = \frac{2 \pi L_e k_{eff} \Delta T_{crit}}{\ln(r_{w,in}/r_v)} \tag{3.20}$$
+
+$$\Delta T_{crit} = \frac{2 \sigma T_{sat}}{\rho_v h_{fg} r_n} \tag{3.21}$$
+
+di mana $r_n$ adalah jari-jari rongga nukleasi ($\sim 2{,}5 \times 10^{-7}\text{ m}$) dan $k_{eff}$ adalah konduktivitas termal efektif campuran matriks padat-natrium cair.
+
+#### 5. Batas Viskos (*Viscous Limit*, $Q_{visc}$)
+Membatasi laju perpindahan kalor pada temperatur pemulaian dingin (*cold startup*) [7]:
+
+$$Q_{visc} = \frac{A_v r_v^2 h_{fg} \rho_v P_{sat}}{16 \mu_v L_{eff}} \tag{3.22}$$
+
+Daya batas operasional rekayasa pipa kalor adalah:
+
+$$Q_{max}(T) = \min \left( Q_{cap}, Q_{sonic}, Q_{ent}, Q_{boil}, Q_{visc} \right) \tag{3.23}$$
+
+---
+
+### III.1.6. Jaringan Hambatan Termal Radial
+
+Perpindahan panas dari bahan bakar nuklir ke uap natrium melalui dinding wadah kelongsong dan struktur kapiler dimodelkan menggunakan analogi sirkuit hambatan termal radial silindris [7]:
+
+$$R_{wall} = \frac{\ln(r_o / r_{w,in})}{2 \pi L k_{wall}} \tag{3.24}$$
+
+$$R_{wick} = \frac{\ln(r_{w,in} / r_v)}{2 \pi L k_{eff}} \tag{3.25}$$
+
+Distribusi temperatur dinding luar pipa kalor $T_{wall}(x)$ berhubungan langsung dengan temperatur inti uap $T_v(x)$ melalui beda temperatur radial:
+
+$$\Delta T_{radial,e} = Q_{in} (R_{wall,e} + R_{wick,e}) \tag{3.26}$$
+
+$$\Delta T_{radial,c} = Q_{in} (R_{wall,c} + R_{wick,c}) \tag{3.27}$$
+
+---
+
+## III.2. Hipotesis
+
+Berdasarkan tinjauan teoretik di atas, hipotesis dalam penelitian ini dirumuskan sebagai berikut:
+1. Pemodelan tereduksi 1D yang menggabungkan dinamika uap kompresibel Navier-Stokes tereduksi dan aliran kapiler Darcy arteri komposit mampu memprediksi profil temperatur aksial pipa kalor natrium dengan tingkat akurasi tinggi ($R^2 > 0{,}90$ dan $\text{RMSE} < 5\text{ K}$) dibandingkan data telemetri reaktor KRUSTY NASA.
+2. Pada kondisi mikrogravitasi antariksa ($0g$), ketiadaan penalti tekanan hidrostatik cairan natrium akan meningkatkan batas kapiler operasional pipa kalor hingga lebih dari 10 kali lipat kapasitas uji darat vertikal ($1g$), sehingga satu unit pipa kalor natrium mampu mentransfer daya termal puncak pin teras ISR ($\sim 10{,}25\text{ kW}_{\text{th}}$) dengan margin keselamatan kapiler melampaui 100%.
+3. Penggantian sistem pompa paksa Na-78K pada teras ISR 500 $\text{kW}_{\text{th}}$ dengan 61 unit pipa kalor natrium mandiri mampu menurunkan massa total subsistem pendingin lebih dari 25%, mengeliminasi seluruh sumber getaran mekanik pada wahana antariksa, serta meningkatkan keandalan pasif teras secara signifikan.

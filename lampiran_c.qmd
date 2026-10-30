@@ -1,0 +1,25 @@
+# LAMPIRAN C: DATA TELEMETRI VALIDASI LAPANGAN NASA KRUSTY {.unnumbered}
+
+Tabel C.1. Data spesifikasi uji stasioner daya penuh NASA KRUSTY (NASA/TM-2018-219702).
+
+| Parameter Eksperimen | Nilai Nominal | Satuan |
+| :--- | :--- | :--- |
+| **Daya Termal Teras Total** | 5000 | W (5 $\text{kW}_{\text{th}}$) |
+| **Jumlah Pipa Kalor Natrium** | 8 | unit |
+| **Beban Termal per Pipa Kalor** | 625 | W |
+| **Material Selubung Wadah** | Haynes 230 Superalloy | - |
+| **Diameter Luar Pipa Kalor** | 12,7 (0,5 inci) | mm |
+| **Tebal Dinding Selubung** | 0,89 | mm |
+| **Panjang Evaporator ($L_e$)** | 250 | mm |
+| **Panjang Adiabatik ($L_a$)** | 480 | mm |
+| **Panjang Kondensor ($L_c$)** | 320 | mm |
+| **Panjang Total ($L_{total}$)** | 1050 | mm |
+| **Jenis Struktur Kapiler** | Annular Sintered Sodium Powder Wick | - |
+| **Tebal Struktur Wick** | 0,75 | mm |
+| **Jari-Jari Pori Efektif ($r_{eff}$)** | 30 | $\mu\text{m}$ |
+| **Porositas Wick ($\varepsilon$)** | 0,62 | - |
+| **Fluida Kerja** | Natrium murni (Na) | - |
+| **Massa Isian Natrium** | 22 | gram per pipa kalor |
+| **Temperatur Inti Evaporator** | 1028,5 | K (755,3 °C) |
+| **Sistem Konversi Daya** | Mesin Stirling Sunpower Free-Piston | - |
+| **Orientasi Uji** | Vertikal melawan gravitasi ($\psi = 90^\circ$, $g = 9{,}81\text{ m/s}^2$) | - |
